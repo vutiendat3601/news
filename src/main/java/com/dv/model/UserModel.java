@@ -10,7 +10,7 @@ public class UserModel extends AbstractModel {
     private String username;
     private String password;
     private Integer status;
-
     // Foreign key
     private Long roleId;
+    private String roleCode;
 }

@@ -2,7 +2,6 @@ package com.dv.controller.admin.api;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,15 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dv.model.RoleModel;
-import com.dv.service.RoleService;
-import com.dv.service.impl.RoleServiceImpl;
+import com.dv.model.UserModel;
+import com.dv.service.UserService;
+import com.dv.service.impl.UserServiceImpl;
 import com.dv.util.HttpUtil;
 
-@WebServlet(urlPatterns = { "/api-role" })
-public class RoleAPI extends HttpServlet {
+@WebServlet(urlPatterns = { "/api-user" })
+public class UserAPI extends HttpServlet {
 
-    RoleService roleService = new RoleServiceImpl();
+    private UserService userService = new UserServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,13 +25,8 @@ public class RoleAPI extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
         
-        // <---
-        List<RoleModel> roles = roleService.findAll();
-
-        // --->
-        String roleJson = HttpUtil.toJson(roles);
         PrintWriter writer = resp.getWriter();
-        writer.write(roleJson);
+        writer.write("CHua lam gi car");
     }
 
     @Override
@@ -42,13 +36,13 @@ public class RoleAPI extends HttpServlet {
         resp.setContentType("application/json");
 
         // <---
-        String roleJson = HttpUtil.toJson(req);
-        RoleModel role = HttpUtil.toModel(roleJson, RoleModel.class);
-        role = roleService.save(role);
+        String userJson = HttpUtil.toJson(req);
+        UserModel user = HttpUtil.toModel(userJson, UserModel.class);
+        user = userService.save(user);
 
         // --->
-        roleJson = HttpUtil.toJson(role);
+        userJson = HttpUtil.toJson(user);
         PrintWriter writer = resp.getWriter();
-        writer.write(roleJson);
+        writer.write(userJson);
     }
 }

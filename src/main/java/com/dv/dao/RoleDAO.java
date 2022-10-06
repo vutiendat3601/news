@@ -8,5 +8,8 @@ public interface RoleDAO {
     List<RoleModel> findAll();
 
     RoleModel findOne(Long id);
-    
+
+    RoleModel findOneByCode(String code);
+
+    Long save(RoleModel role);
 }

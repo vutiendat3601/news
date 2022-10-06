@@ -32,6 +32,7 @@ public abstract class AbstractDAO<T> implements GenericDAO<T> {
                 }
             }
         } catch (SQLException e) {
+            System.err.println(e.getMessage());
         }
         return results;
     }
@@ -54,13 +55,24 @@ public abstract class AbstractDAO<T> implements GenericDAO<T> {
                 }
             }
         } catch (SQLException e) {
+            System.err.println(e.getMessage());
         }
         return id;
     }
 
     @Override
     public void update(String sql, Object... params) {
-
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = DBUtil.getConnection();
+            if (connection != null) {
+                statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                setParameter(statement, params);
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+        }
     }
 
     @Override
@@ -80,6 +92,7 @@ public abstract class AbstractDAO<T> implements GenericDAO<T> {
                 }
             }
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
         return count;
     }
@@ -98,6 +111,7 @@ public abstract class AbstractDAO<T> implements GenericDAO<T> {
                 }
             }
         } catch (SQLException e) {
+            System.err.println(e.getMessage());
         }
     }
 }

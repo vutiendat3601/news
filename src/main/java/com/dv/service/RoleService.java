@@ -8,4 +8,6 @@ public interface RoleService {
     List<RoleModel> findAll();
 
     RoleModel findOne(Long id);
+
+    RoleModel save(RoleModel role);
 }

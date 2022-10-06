@@ -13,4 +13,5 @@ public abstract class AbstractModel {
     private Timestamp modifiedDate;
     private String createdBy;
     private String modifiedBy;
+    private Long[] ids;
 }

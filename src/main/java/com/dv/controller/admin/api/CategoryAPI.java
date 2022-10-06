@@ -10,29 +10,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dv.model.RoleModel;
-import com.dv.service.RoleService;
-import com.dv.service.impl.RoleServiceImpl;
+import com.dv.model.CategoryModel;
+import com.dv.service.CategoryService;
+import com.dv.service.impl.CategoryServiceImpl;
 import com.dv.util.HttpUtil;
 
-@WebServlet(urlPatterns = { "/api-role" })
-public class RoleAPI extends HttpServlet {
+@WebServlet(urlPatterns = { "/api-category" })
+public class CategoryAPI extends HttpServlet {
 
-    RoleService roleService = new RoleServiceImpl();
+    CategoryService categoryService = new CategoryServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
-        
+
         // <---
-        List<RoleModel> roles = roleService.findAll();
+        List<CategoryModel> categories = categoryService.findAll();
 
         // --->
-        String roleJson = HttpUtil.toJson(roles);
+        String categoryJson = HttpUtil.toJson(categories);
         PrintWriter writer = resp.getWriter();
-        writer.write(roleJson);
+        writer.write(categoryJson);
     }
 
     @Override
@@ -42,13 +42,13 @@ public class RoleAPI extends HttpServlet {
         resp.setContentType("application/json");
 
         // <---
-        String roleJson = HttpUtil.toJson(req);
-        RoleModel role = HttpUtil.toModel(roleJson, RoleModel.class);
-        role = roleService.save(role);
+        String categoryJson = HttpUtil.toJson(req);
+        CategoryModel category = HttpUtil.toModel(categoryJson, CategoryModel.class);
+        category = categoryService.save(category);
 
         // --->
-        roleJson = HttpUtil.toJson(role);
+        categoryJson = HttpUtil.toJson(category);
         PrintWriter writer = resp.getWriter();
-        writer.write(roleJson);
+        writer.write(categoryJson);
     }
 }

@@ -13,4 +13,5 @@ public class NewsModel extends AbstractModel {
 
     // Foreign key
     private Long categoryId;
+    private String categoryCode;
 }

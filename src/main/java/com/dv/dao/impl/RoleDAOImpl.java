@@ -25,4 +25,21 @@ public class RoleDAOImpl extends AbstractDAO<RoleModel> implements RoleDAO {
         RoleModel role = roles.isEmpty() ? null : roles.get(0);
         return role;
     }
+
+    @Override
+    public Long save(RoleModel role) {
+        Long id = null;
+        String sql = "INSERT INTO role(name, code) VALUES(?, ?)";
+        id = insert(sql, role.getName(), role.getCode());
+        return id;
+    }
+
+    @Override
+    public RoleModel findOneByCode(String code) {
+        String sql = "SELECT * FROM role WHERE code = ?";
+        RowMapper<RoleModel> mapper = new RoleMapper();
+        List<RoleModel> roles = query(sql, mapper, code);
+        RoleModel role = roles.isEmpty() ? null : roles.get(0);
+        return role;
+    }
 }

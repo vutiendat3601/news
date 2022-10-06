@@ -17,6 +17,7 @@ public class RoleMapper implements RowMapper<RoleModel> {
                 role.setName(resultSet.getString("name"));
                 role.setCode(resultSet.getString("code"));
             } catch (SQLException e) {
+                System.err.println(e.getMessage());
             }
         }
         return role;

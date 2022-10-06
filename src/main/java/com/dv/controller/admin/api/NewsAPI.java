@@ -10,29 +10,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dv.model.RoleModel;
-import com.dv.service.RoleService;
-import com.dv.service.impl.RoleServiceImpl;
+import com.dv.model.NewsModel;
+import com.dv.service.NewsService;
+import com.dv.service.impl.NewsServiceImpl;
 import com.dv.util.HttpUtil;
 
-@WebServlet(urlPatterns = { "/api-role" })
-public class RoleAPI extends HttpServlet {
+@WebServlet(urlPatterns = { "/api-news" })
+public class NewsAPI extends HttpServlet {
 
-    RoleService roleService = new RoleServiceImpl();
+    private NewsService newsService = new NewsServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
-        
         // <---
-        List<RoleModel> roles = roleService.findAll();
+        Long categoryId = Long.valueOf(req.getParameter("categoryId"));
+        List<NewsModel> newses = newsService.findByCategoryId(categoryId);
 
         // --->
-        String roleJson = HttpUtil.toJson(roles);
+        String newsJson = HttpUtil.toJson(newses);
         PrintWriter writer = resp.getWriter();
-        writer.write(roleJson);
+        writer.write(newsJson);
     }
 
     @Override
@@ -42,13 +42,13 @@ public class RoleAPI extends HttpServlet {
         resp.setContentType("application/json");
 
         // <---
-        String roleJson = HttpUtil.toJson(req);
-        RoleModel role = HttpUtil.toModel(roleJson, RoleModel.class);
-        role = roleService.save(role);
+        String newsJson = HttpUtil.toJson(req);
+        NewsModel role = HttpUtil.toModel(newsJson, NewsModel.class);
+        role = newsService.save(role);
 
         // --->
-        roleJson = HttpUtil.toJson(role);
+        newsJson = HttpUtil.toJson(role);
         PrintWriter writer = resp.getWriter();
-        writer.write(roleJson);
+        writer.write(newsJson);
     }
 }
