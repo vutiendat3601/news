@@ -28,9 +28,9 @@ public class NewsDAOImpl extends AbstractDAO<NewsModel> implements NewsDAO {
         sql.append(" SELECT * FROM news ");
 
         Sorter sorter = page.getSorter();
-        if (sorter != null && !StringUtils.isBlank(sorter.getSortName()) &&
+        if (sorter != null && !StringUtils.isBlank(sorter.getSortType()) &&
                 !StringUtils.isBlank(sorter.getSortBy())) {
-            sql.append(" ORDER BY " + sorter.getSortBy() + " " + sorter.getSortName() + " ");
+            sql.append(" ORDER BY " + sorter.getSortBy() + " " + sorter.getSortType() + " ");
         }
         if (page.getLimit() != null && page.getOffset() != null) {
             sql.append(" LIMIT " + page.getLimit() + " OFFSET " + page.getOffset() + " ");

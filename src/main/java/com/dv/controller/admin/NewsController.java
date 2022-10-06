@@ -33,8 +33,7 @@ public class NewsController extends HttpServlet {
         // <---
         NewsModel news = FormUtil.toModel(req, NewsModel.class);
         Pageable page = new PageRequest(news.getPage(), news.getMaxPageItem(),
-                new Sorter(news.getSortBy(), news.getSortName()));
-
+                new Sorter(news.getSortBy(), news.getSortType()));
         List<NewsModel> newses = newsService.findAll(page);
 
         // --->

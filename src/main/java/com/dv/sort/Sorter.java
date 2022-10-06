@@ -11,5 +11,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Sorter {
     private String sortBy;
-    private String sortName;
+    private String sortType;
 }

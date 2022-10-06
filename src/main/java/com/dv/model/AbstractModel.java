@@ -22,7 +22,7 @@ public abstract class AbstractModel<T> {
 	private Integer maxPageItem;
 	private Integer totalPage;
 	private Long totalItem;
-	private String sortName;
+	private String sortType;
 	private String sortBy;
 	private String alert;
 	private String message;
