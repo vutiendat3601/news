@@ -5,14 +5,13 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.dv.model.AbstractModel;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class HttpUtil {
 
-    public static <T extends AbstractModel> T toModel(String jsonValue, Class<T> clazz) {
+    public static <T> T toModel(String jsonValue, Class<T> clazz) {
         T model = null;
         ObjectMapper mapper = new ObjectMapper();
         try {

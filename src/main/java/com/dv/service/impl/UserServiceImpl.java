@@ -2,19 +2,21 @@ package com.dv.service.impl;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import com.dv.dao.RoleDAO;
 import com.dv.dao.UserDAO;
-import com.dv.dao.impl.RoleDAOImpl;
-import com.dv.dao.impl.UserDAOImpl;
 import com.dv.model.RoleModel;
 import com.dv.model.UserModel;
 import com.dv.service.UserService;
 
 public class UserServiceImpl implements UserService {
 
-    UserDAO userDAO = new UserDAOImpl();
+    @Inject
+    UserDAO userDAO ;
 
-    RoleDAO roleDAO = new RoleDAOImpl();
+    @Inject
+    RoleDAO roleDAO ;
 
     @Override
     public List<UserModel> findAll() {

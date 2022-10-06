@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,19 +13,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dv.model.NewsModel;
 import com.dv.service.NewsService;
-import com.dv.service.impl.NewsServiceImpl;
 import com.dv.util.HttpUtil;
 
-@WebServlet(urlPatterns = { "/api-news" })
+@WebServlet(urlPatterns = { "/api-admin-news" })
 public class NewsAPI extends HttpServlet {
-
-    private NewsService newsService = new NewsServiceImpl();
+    @Inject
+    private NewsService newsService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
+        
         // <---
         Long categoryId = Long.valueOf(req.getParameter("categoryId"));
         List<NewsModel> newses = newsService.findByCategoryId(categoryId);

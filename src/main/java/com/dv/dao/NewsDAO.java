@@ -7,9 +7,14 @@ import com.dv.model.NewsModel;
 public interface NewsDAO {
     List<NewsModel> findAll();
 
+    List<NewsModel> findAll(Integer limit, Integer offset);
+
     List<NewsModel> findByCategoryId(Long id);
 
     NewsModel findOne(Long id);
 
     Long save(NewsModel role);
+
+    Long getTotalItem();
+
 }

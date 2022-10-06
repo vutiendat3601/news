@@ -76,19 +76,19 @@ public abstract class AbstractDAO<T> implements GenericDAO<T> {
     }
 
     @Override
-    public Integer count(String sql, Object... params) {
-        Integer count = null;
+    public Long count(String sql, Object... params) {
+        Long count = null;
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
             connection = DBUtil.getConnection();
             if (connection != null) {
-                statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                statement = connection.prepareStatement(sql);
                 setParameter(statement, params);
                 resultSet = statement.executeQuery();
                 if (resultSet.next()) {
-                    count = resultSet.getInt(1);
+                    count = resultSet.getLong(1);
                 }
             }
         } catch (SQLException e) {

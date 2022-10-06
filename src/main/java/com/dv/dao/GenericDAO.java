@@ -11,5 +11,5 @@ public interface GenericDAO<T> {
 
     void update(String sql, Object... params);
 
-    Integer count(String sql, Object... params);
+    Long count(String sql, Object... params);
 }

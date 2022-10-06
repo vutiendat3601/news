@@ -11,7 +11,7 @@ public class UserDAOImpl extends AbstractDAO<UserModel> implements UserDAO {
 
     @Override
     public List<UserModel> findAll() {
-        String sql = "SELECT * FROM user";
+        String sql = "SELECT * FROM user ";
         RowMapper<UserModel> mapper = new UserMapper();
         List<UserModel> roles = query(sql, mapper);
         return roles;
@@ -19,7 +19,7 @@ public class UserDAOImpl extends AbstractDAO<UserModel> implements UserDAO {
 
     @Override
     public UserModel findOne(Long id) {
-        String sql = "SELECT * FROM user WHERE id = ?";
+        String sql = "SELECT * FROM user WHERE id = ? ";
         RowMapper<UserModel> mapper = new UserMapper();
         List<UserModel> users = query(sql, mapper, id);
         UserModel user = users.isEmpty() ? null : users.get(0);

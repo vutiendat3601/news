@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CommentModel extends AbstractModel {
+public class CommentModel extends AbstractModel<CommentModel> {
     private String content;
 
     // Foreign key

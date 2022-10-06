@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/common/taglib.jsp"%>
-<c:url var="APIurl" value="/api-admin-new"/>
-<c:url var ="NewURL" value="/admin-new"/>
+<c:url var="APIurl" value="/api-admin-news"/>
+<c:url var="NewsURL" value="/admin-news"/>
 <html>
 <head>
     <title>Chỉnh sửa bài viết</title>
@@ -87,7 +87,7 @@
                             <br/>
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <c:if test="${not empty model.id}">
+                                     <c:if test="${not empty model.id}">
                                         <input type="button" class="btn btn-white btn-warning btn-bold" value="Cập nhật bài viết" id="btnAddOrUpdateNew"/>
                                     </c:if>
                                     <c:if test="${empty model.id}">
@@ -131,10 +131,10 @@
             data: JSON.stringify(data),
             dataType: 'json',
             success: function (result) {
-            	window.location.href = "${NewURL}?type=edit&id="+result.id+"&message=insert_success";
+            	window.location.href = "${NewsURL}?type=edit&id="+result.id+"&message=insert_success";
             },
             error: function (error) {
-            	window.location.href = "${NewURL}?type=list&maxPageItem=2&page=1&message=error_system";
+            	window.location.href = "${NewsURL}?type=list&maxPageItem=2&page=1&message=error_system";
             }
         });
     }
@@ -146,10 +146,10 @@
             data: JSON.stringify(data),
             dataType: 'json',
             success: function (result) {
-            	window.location.href = "${NewURL}?type=edit&id="+result.id+"&message=update_success";
+            	window.location.href = "${NewsURL}?type=edit&id="+result.id+"&message=update_success";
             },
             error: function (error) {
-            	window.location.href = "${NewURL}?type=list&maxPageItem=2&page=1&message=error_system";
+            	window.location.href = "${NewsURL}?type=list&maxPageItem=2&page=1&message=error_system";
             }
         });
     }

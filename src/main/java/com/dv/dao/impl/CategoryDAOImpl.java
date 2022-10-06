@@ -10,7 +10,7 @@ import com.dv.model.CategoryModel;
 public class CategoryDAOImpl extends AbstractDAO<CategoryModel> implements CategoryDAO {
     @Override
     public List<CategoryModel> findAll() {
-        String sql = "SELECT * FROM category";
+        String sql = "SELECT * FROM category ";
         RowMapper<CategoryModel> mapper = new CategoryMapper();
         List<CategoryModel> categories = query(sql, mapper);
         return categories;
@@ -18,7 +18,7 @@ public class CategoryDAOImpl extends AbstractDAO<CategoryModel> implements Categ
 
     @Override
     public CategoryModel findOne(Long id) {
-        String sql = "SELECT * FROM category WHERE id = ?";
+        String sql = "SELECT * FROM category WHERE id = ? ";
         RowMapper<CategoryModel> mapper = new CategoryMapper();
         List<CategoryModel> categories = query(sql, mapper, id);
         CategoryModel category = categories.isEmpty() ? null : categories.get(0);
@@ -28,14 +28,14 @@ public class CategoryDAOImpl extends AbstractDAO<CategoryModel> implements Categ
     @Override
     public Long save(CategoryModel category) {
         Long id = null;
-        String sql = "INSERT INTO category(name, code) VALUES(?, ?)";
+        String sql = "INSERT INTO category(name, code) VALUES(?, ?) ";
         id = insert(sql, category.getName(), category.getCode());
         return id;
     }
 
     @Override
     public CategoryModel findOneByCode(String code) {
-        String sql = "SELECT * FROM category WHERE code = ?";
+        String sql = "SELECT * FROM category WHERE code = ? ";
         RowMapper<CategoryModel> mapper = new CategoryMapper();
         List<CategoryModel> categories = query(sql, mapper, code);
         CategoryModel category = categories.isEmpty() ? null : categories.get(0);

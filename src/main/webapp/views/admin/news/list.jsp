@@ -1,6 +1,6 @@
 <%@include file="/common/taglib.jsp"%>
-<c:url var="APIurl" value="/api-admin-new"/>
-<c:url var ="NewURL" value="/admin-new"/>
+<c:url var="APIurl" value="/api-admin-news"/>
+<c:url var="NewsURL" value="/admin-news"/>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 	<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -13,7 +13,7 @@
 
 	<body>
 		<div class="main-content">
-		<form action="<c:url value='/admin-new'/>" id="formSubmit" method="get">
+		<form action="<c:url value='/admin-news'/>" id="formSubmit" method="get">
 				<div class="main-content-inner">
 					<div class="breadcrumbs ace-save-state" id="breadcrumbs">
 						<ul class="breadcrumb">
@@ -38,7 +38,7 @@
 											<div class="dt-buttons btn-overlap btn-group">
 												<a flag="info"
 												   class="dt-button buttons-colvis btn btn-white btn-primary btn-bold" data-toggle="tooltip"
-												   title='Thêm bài viết' href='<c:url value="/admin-new?type=edit"/>'>
+												   title='Thêm bài viết' href='<c:url value="/admin-news?type=edit"/>'>
 															<span>
 																<i class="fa fa-plus-circle bigger-110 purple"></i>
 															</span>
@@ -66,13 +66,13 @@
 													</tr>
 												</thead>
 												<tbody>
-													<c:forEach var="item" items="${model.listResult}">
+													<c:forEach var="item" items="${model.resultList}">
 														<tr>
 															<td><input type="checkbox" id="checkbox_${item.id}" value="${item.id}"></td>
 															<td>${item.title}</td>
 															<td>${item.shortDescription}</td>
 															<td>
-																<c:url var="editURL" value="/admin-new">
+																<c:url var="editURL" value="/admin-news">
 																	<c:param name="type" value="edit"/>
 																	<c:param name="id" value="${item.id}"/>
 																</c:url>
@@ -128,20 +128,20 @@
 		            return $(this).val();
 		        }).get();
 				data['ids'] = ids;
-				deleteNew(data);
+				deleteNews(data);
 			});
 			
-			function deleteNew(data) {
+			function deleteNews(data) {
 		        $.ajax({
 		            url: '${APIurl}',
 		            type: 'DELETE',
 		            contentType: 'application/json',
 		            data: JSON.stringify(data),
 		            success: function (result) {
-		                window.location.href = "${NewURL}?type=list&maxPageItem=2&page=1&message=delete_success";
+		                window.location.href = "${NewsURL}?type=list&maxPageItem=2&page=1&message=delete_success";
 		            },
 		            error: function (error) {
-		            	window.location.href = "${NewURL}?type=list&maxPageItem=2&page=1&message=error_system";
+		            	window.location.href = "${NewsURL}?type=list&maxPageItem=2&page=1&message=error_system";
 		            }
 		        });
 		    }

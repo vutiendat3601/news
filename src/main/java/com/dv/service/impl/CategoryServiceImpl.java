@@ -2,14 +2,16 @@ package com.dv.service.impl;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import com.dv.dao.CategoryDAO;
-import com.dv.dao.impl.CategoryDAOImpl;
 import com.dv.model.CategoryModel;
 import com.dv.service.CategoryService;
 
 public class CategoryServiceImpl implements CategoryService {
 
-    CategoryDAO categoryDAO = new CategoryDAOImpl();
+    @Inject
+    CategoryDAO categoryDAO;
 
     @Override
     public List<CategoryModel> findAll() {

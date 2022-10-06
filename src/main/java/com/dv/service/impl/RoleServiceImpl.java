@@ -2,14 +2,16 @@ package com.dv.service.impl;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import com.dv.dao.RoleDAO;
-import com.dv.dao.impl.RoleDAOImpl;
 import com.dv.model.RoleModel;
 import com.dv.service.RoleService;
 
 public class RoleServiceImpl implements RoleService {
 
-    RoleDAO roleDAO = new RoleDAOImpl();
+    @Inject
+    RoleDAO roleDAO;
 
     @Override
     public List<RoleModel> findAll() {

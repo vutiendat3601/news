@@ -2,23 +2,31 @@ package com.dv.service.impl;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import com.dv.dao.CategoryDAO;
 import com.dv.dao.NewsDAO;
-import com.dv.dao.impl.CategoryDAOImpl;
-import com.dv.dao.impl.NewsDAOImpl;
 import com.dv.model.CategoryModel;
 import com.dv.model.NewsModel;
 import com.dv.service.NewsService;
 
 public class NewsServiceImpl implements NewsService {
 
-    private NewsDAO newsDAO = new NewsDAOImpl();
+    @Inject
+    private NewsDAO newsDAO;
 
-    private CategoryDAO categoryDAO = new CategoryDAOImpl();
+    @Inject
+    private CategoryDAO categoryDAO;
 
     @Override
     public List<NewsModel> findAll() {
         List<NewsModel> newses = newsDAO.findAll();
+        return newses;
+    }
+
+    @Override
+    public List<NewsModel> findAll(Integer limit, Integer offset) {
+        List<NewsModel> newses = newsDAO.findAll(limit, offset);
         return newses;
     }
 
@@ -44,6 +52,12 @@ public class NewsServiceImpl implements NewsService {
     public List<NewsModel> findByCategoryId(Long categoryId) {
         List<NewsModel> newses = newsDAO.findByCategoryId(categoryId);
         return newses;
+    }
+
+    @Override
+    public Long getTotalItem() {
+        Long totalItem = newsDAO.getTotalItem();
+        return totalItem;
     }
 
 }
