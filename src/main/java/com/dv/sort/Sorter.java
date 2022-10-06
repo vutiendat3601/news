@@ -10,6 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Sorter {
-    private String sortName;
     private String sortBy;
+    private String sortName;
 }

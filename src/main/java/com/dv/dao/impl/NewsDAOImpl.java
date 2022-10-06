@@ -2,10 +2,14 @@ package com.dv.dao.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.dv.dao.NewsDAO;
 import com.dv.mapper.NewsMapper;
 import com.dv.mapper.RowMapper;
 import com.dv.model.NewsModel;
+import com.dv.paging.Pageable;
+import com.dv.sort.Sorter;
 
 public class NewsDAOImpl extends AbstractDAO<NewsModel> implements NewsDAO {
 
@@ -18,17 +22,22 @@ public class NewsDAOImpl extends AbstractDAO<NewsModel> implements NewsDAO {
     }
 
     @Override
-    public List<NewsModel> findAll(Integer limit, Integer offset) {
+    public List<NewsModel> findAll(Pageable page) {
         List<NewsModel> newses = null;
         StringBuilder sql = new StringBuilder();
-        sql.append("SELECT * FROM news");
-        RowMapper<NewsModel> mapper = new NewsMapper();
-        if (limit != null && offset != null) {
-            sql.append(" LIMIT ? OFFSET ? ");
-            newses = query(sql.toString(), mapper, limit, offset);
-        } else {
-            newses = query(sql.toString(), mapper);
+        sql.append(" SELECT * FROM news ");
+
+        Sorter sorter = page.getSorter();
+        if (sorter != null && !StringUtils.isBlank(sorter.getSortName()) &&
+                !StringUtils.isBlank(sorter.getSortBy())) {
+            sql.append(" ORDER BY " + sorter.getSortBy() + " " + sorter.getSortName() + " ");
         }
+        if (page.getLimit() != null && page.getOffset() != null) {
+            sql.append(" LIMIT " + page.getLimit() + " OFFSET " + page.getOffset() + " ");
+        }
+
+        RowMapper<NewsModel> mapper = new NewsMapper();
+        newses = query(sql.toString(), mapper);
         return newses;
     }
 

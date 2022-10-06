@@ -8,6 +8,7 @@ import com.dv.dao.CategoryDAO;
 import com.dv.dao.NewsDAO;
 import com.dv.model.CategoryModel;
 import com.dv.model.NewsModel;
+import com.dv.paging.Pageable;
 import com.dv.service.NewsService;
 
 public class NewsServiceImpl implements NewsService {
@@ -25,8 +26,8 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public List<NewsModel> findAll(Integer limit, Integer offset) {
-        List<NewsModel> newses = newsDAO.findAll(limit, offset);
+    public List<NewsModel> findAll(Pageable page) {
+        List<NewsModel> newses = newsDAO.findAll(page);
         return newses;
     }
 

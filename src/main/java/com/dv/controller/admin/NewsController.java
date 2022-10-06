@@ -13,7 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dv.constant.SystemConstant;
 import com.dv.model.NewsModel;
+import com.dv.paging.PageRequest;
+import com.dv.paging.Pageable;
 import com.dv.service.NewsService;
+import com.dv.sort.Sorter;
 import com.dv.util.FormUtil;
 
 @WebServlet(urlPatterns = { "/admin-news" })
@@ -29,10 +32,10 @@ public class NewsController extends HttpServlet {
 
         // <---
         NewsModel news = FormUtil.toModel(req, NewsModel.class);
-        Integer offset = (news.getPage() - 1) * news.getMaxPageItem();
-        news.setTotalItem(newsService.getTotalItem());
-        news.setTotalPage((int) Math.ceil((double) news.getTotalItem() / news.getMaxPageItem()));
-        List<NewsModel> newses = newsService.findAll(news.getMaxPageItem(), offset);
+        Pageable page = new PageRequest(news.getPage(), news.getMaxPageItem(),
+                new Sorter(news.getSortBy(), news.getSortName()));
+
+        List<NewsModel> newses = newsService.findAll(page);
 
         // --->
         news.setResultList(newses);
