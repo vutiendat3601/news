@@ -15,6 +15,7 @@ import com.dv.constant.SystemConstant;
 import com.dv.model.CategoryModel;
 import com.dv.model.UserModel;
 import com.dv.service.CategoryService;
+import com.dv.service.NewsService;
 import com.dv.service.UserService;
 import com.dv.util.FormUtil;
 import com.dv.util.SessionUtil;
@@ -24,6 +25,9 @@ public class HomeController extends HttpServlet {
 
     @Inject
     private CategoryService categoryService;
+
+    @Inject
+    private NewsService newsService;
 
     @Inject
     private UserService userService;
