@@ -17,7 +17,7 @@
 							${message}
 					</div>
 				</c:if>
-				<form action="<c:url value='/dang-nhap'/>" id="formLogin" method="post">
+				<form action="<c:url value='/dang-nhap'/>" id="formLogin" method="POST">
 					<div class="form-group">
 						<input type="text" class="form-control" id="userName" name="username"
 							placeholder="Tên đăng nhập">
