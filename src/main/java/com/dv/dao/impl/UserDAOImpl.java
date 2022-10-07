@@ -41,7 +41,7 @@ public class UserDAOImpl extends AbstractDAO<UserModel> implements UserDAO {
     @Override
     public UserModel findByUsernameAndPasswordAndStatus(String username, String password, Integer status) {
         StringBuilder sql = new StringBuilder();
-        sql.append("SELECT * FROM `user` u INNER JOIN `role` r ON r.id = u.role_id ");
+        sql.append("SELECT * FROM user u INNER JOIN role r ON r.id = u.role_id ");
         sql.append(" WHERE username = ? AND password = ? AND status = ? ");
         RowMapper<UserModel> mapper = new UserMapper();
         List<UserModel> users = query(sql.toString(), mapper, username, password, status);
