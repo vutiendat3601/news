@@ -31,18 +31,20 @@ public class HomeController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
 
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/web/home.jsp");
+        RequestDispatcher requestDispatcher = null;
         if (action != null) {
             if (action.equals("login")) {
                 requestDispatcher = req.getRequestDispatcher("/views/login.jsp");
             } else if (action.equals("logout")) {
-                return;
             }
         } else {
+            requestDispatcher = req.getRequestDispatcher("/views/home.jsp");
             List<CategoryModel> categories = categoryService.findAll();
             req.setAttribute("categories", categories);
         }
-        requestDispatcher.forward(req, resp);
+        if (requestDispatcher != null) {
+            requestDispatcher.forward(req, resp);
+        }
     }
 
     @Override
