@@ -55,7 +55,7 @@ public class HomeController extends HttpServlet {
                 if (user != null) {
                     SessionUtil session = SessionUtil.getInstance();
                     session.setValue(req, "user", user);
-                    
+
                     // Filter role
                     if (user.getRole().getCode().equals("USER")) {
                         resp.sendRedirect(req.getContextPath() + "/homepage");
@@ -63,7 +63,7 @@ public class HomeController extends HttpServlet {
                         resp.sendRedirect(req.getContextPath() + "/admin-home");
                     }
                 } else {
-                    resp.sendRedirect(req.getContextPath() + "/login.jsp");
+                    resp.sendRedirect(req.getContextPath() + "/views/login.jsp");
                 }
             }
         }
