@@ -10,4 +10,6 @@ public interface UserDAO {
     UserModel findOne(Long id);
 
     Long save(UserModel role);
+
+    UserModel findByUsernameAndPasswordAndStatus(String username, String password, Integer status);
 }

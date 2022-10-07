@@ -13,4 +13,9 @@
         <pattern>/*</pattern>
     </decorator>
 
+    <decorator>
+        <pattern>/dang-nhap</pattern>
+        <pattern>/login</pattern>
+    </decorator>
+
 </decorators>

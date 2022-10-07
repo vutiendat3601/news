@@ -72,6 +72,7 @@ public abstract class AbstractDAO<T> implements GenericDAO<T> {
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
+            System.err.println(e.getMessage());
         }
     }
 
@@ -92,7 +93,7 @@ public abstract class AbstractDAO<T> implements GenericDAO<T> {
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
         return count;
     }

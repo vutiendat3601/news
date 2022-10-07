@@ -38,4 +38,14 @@ public class UserDAOImpl extends AbstractDAO<UserModel> implements UserDAO {
         return id;
     }
 
+    @Override
+    public UserModel findByUsernameAndPasswordAndStatus(String username, String password, Integer status) {
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT * FROM user WHERE username = ? AND password = ? AND status = ? ");
+        RowMapper<UserModel> mapper = new UserMapper();
+        List<UserModel> users = query(sql.toString(), mapper, username, password, status);
+        UserModel user = users.isEmpty() ? null : users.get(0);
+        return user;
+    }
+
 }
