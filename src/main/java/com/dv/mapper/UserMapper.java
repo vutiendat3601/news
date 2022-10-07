@@ -3,6 +3,7 @@ package com.dv.mapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.dv.model.RoleModel;
 import com.dv.model.UserModel;
 
 public class UserMapper implements RowMapper<UserModel> {
@@ -19,6 +20,11 @@ public class UserMapper implements RowMapper<UserModel> {
                 user.setPassword(resultSet.getString("password"));
                 user.setRoleId(resultSet.getLong("role_id"));
                 user.setStatus(resultSet.getInt("status"));
+                
+                RoleModel role =new RoleModel();
+                role.setId(user.getRoleId());
+                role.setCode(user.getRoleCode());
+                user.setRole(role);
             } catch (SQLException e) {
                 System.err.println(e.getMessage());
             }

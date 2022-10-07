@@ -13,10 +13,10 @@ import com.dv.service.UserService;
 public class UserServiceImpl implements UserService {
 
     @Inject
-    UserDAO userDAO ;
+    UserDAO userDAO;
 
     @Inject
-    RoleDAO roleDAO ;
+    RoleDAO roleDAO;
 
     @Override
     public List<UserModel> findAll() {
@@ -39,6 +39,12 @@ public class UserServiceImpl implements UserService {
 
         // --->
         user = userDAO.findOne(id);
+        return user;
+    }
+
+    @Override
+    public UserModel findByUsernameAndPasswordAndStatus(String username, String password, Integer status) {
+        UserModel user = userDAO.findByUsernameAndPasswordAndStatus(username, password, status);
         return user;
     }
 

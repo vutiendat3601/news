@@ -14,4 +14,7 @@ public class UserModel extends AbstractModel<UserModel> {
     // Foreign key
     private Long roleId;
     private String roleCode;
+
+    // Reference object
+    private RoleModel role;
 }

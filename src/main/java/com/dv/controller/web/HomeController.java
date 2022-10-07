@@ -12,13 +12,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dv.model.CategoryModel;
+import com.dv.model.UserModel;
 import com.dv.service.CategoryService;
+import com.dv.service.UserService;
+import com.dv.util.FormUtil;
+import com.dv.util.SessionUtil;
 
 @WebServlet(urlPatterns = { "/homepage", "/login", "/dang-nhap" })
 public class HomeController extends HttpServlet {
 
     @Inject
     private CategoryService categoryService;
+
+    @Inject
+    private UserService userService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -42,7 +49,23 @@ public class HomeController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
         if (action != null) {
-
+            if (action.equals("login")) {
+                UserModel user = FormUtil.toModel(req, UserModel.class);
+                user = userService.findByUsernameAndPasswordAndStatus(user.getUsername(), user.getPassword(), 1);
+                if (user != null) {
+                    SessionUtil session = SessionUtil.getInstance();
+                    session.setValue(req, "user", user);
+                    
+                    // Filter role
+                    if (user.getRole().getCode().equals("USER")) {
+                        resp.sendRedirect(req.getContextPath() + "/homepage");
+                    } else if (user.getRole().getCode().equals("ADMIN")) {
+                        resp.sendRedirect(req.getContextPath() + "/admin-home");
+                    }
+                } else {
+                    resp.sendRedirect(req.getContextPath() + "/login.jsp");
+                }
+            }
         }
     }
 }

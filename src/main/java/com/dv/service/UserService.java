@@ -10,4 +10,6 @@ public interface UserService {
     UserModel findOne(Long id);
 
     UserModel save(UserModel user);
+
+    UserModel findByUsernameAndPasswordAndStatus(String username, String password, Integer status);
 }
