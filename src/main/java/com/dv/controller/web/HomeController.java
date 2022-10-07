@@ -63,6 +63,7 @@ public class HomeController extends HttpServlet {
                         resp.sendRedirect(req.getContextPath() + "/admin-home");
                     }
                 } else {
+                    System.err.println("no user found");
                     resp.sendRedirect(req.getContextPath() + "/views/login.jsp");
                 }
             }
