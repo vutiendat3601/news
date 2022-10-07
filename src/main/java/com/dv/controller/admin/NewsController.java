@@ -30,6 +30,9 @@ public class NewsController extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
 
+        String datvu = req.getParameter("datvu");
+        System.out.println(datvu);
+
         // <---
         NewsModel news = FormUtil.toModel(req, NewsModel.class);
         news.setTotalItem(newsService.getTotalItem());
