@@ -26,6 +26,7 @@ public abstract class AbstractDAO<T> implements GenericDAO<T> {
                 statement = connection.prepareStatement(sql);
                 setParameter(statement, params);
                 resultSet = statement.executeQuery();
+                System.out.println("Total row: " + resultSet.getRow());
                 while (resultSet.next()) {
                     T t = mapper.map(resultSet);
                     results.add(t);
