@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dv.constant.SystemConstant;
 import com.dv.model.CategoryModel;
 import com.dv.model.UserModel;
 import com.dv.service.CategoryService;
@@ -39,7 +40,9 @@ public class HomeController extends HttpServlet {
             }
         } else {
             List<CategoryModel> categories = categoryService.findAll();
-            req.setAttribute("categories", categories);
+            CategoryModel category = new CategoryModel();
+            category.setResultList(categories);
+            req.setAttribute(SystemConstant.MODEL, category);
         }
         requestDispatcher.forward(req, resp);
     }
