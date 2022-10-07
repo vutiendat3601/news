@@ -38,7 +38,7 @@ public class HomeController extends HttpServlet {
             } else if (action.equals("logout")) {
             }
         } else {
-            requestDispatcher = req.getRequestDispatcher("/views/home.jsp");
+            requestDispatcher = req.getRequestDispatcher("/views/web/home.jsp");
             List<CategoryModel> categories = categoryService.findAll();
             req.setAttribute("categories", categories);
         }
