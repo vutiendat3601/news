@@ -56,7 +56,7 @@ public class HomeController extends HttpServlet {
                     session.setValue(req, "user", user);
 
                     // Filter role
-                    if (user.getRole().getCode().equals("USER")) {
+                    if (user.getRole().getCode().equals("WEB")) {
                         resp.sendRedirect(req.getContextPath() + "/homepage");
                     } else if (user.getRole().getCode().equals("ADMIN")) {
                         resp.sendRedirect(req.getContextPath() + "/admin-home");
